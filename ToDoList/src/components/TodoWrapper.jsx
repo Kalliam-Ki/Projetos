@@ -14,6 +14,7 @@ export const TodoWrapper = () => {
                 concluida: false //Para marcar e mostrar se foi finalizado
             };
             setTodos([...todos, novaTarefa]);
+            //console.log(novaTarefa.id);
     };
 
     const removeTodo = (id) => {
@@ -24,7 +25,7 @@ export const TodoWrapper = () => {
 
     };
 
-    const toggleComplete = (id) => {
+    const marcarConcluida = (id) => {
 
         setTodos(todos.map(todo => todo.id === id ?
             {...todo, concluida: !todo.concluida} 
@@ -37,19 +38,17 @@ export const TodoWrapper = () => {
     return (
         <div className='TodoWrapper'>
 
-            <h1>Lista de Tarefas</h1>
+                <TodoForm addTodo={addTodo} />
 
-            <TodoForm addTodo={addTodo} />
-            
-            {todos.map((todo, index) => (
+                {todos.map((todo, id) => (
 
-                <Todo 
-                    todo={todo}
-                    key={index}
-                    toggleComplete={toggleComplete}
-                    removeTodo={removeTodo} />
-            ))}
-            
+                    <Todo 
+                        todo={todo}
+                        key={id}
+                        marcarConcluida={marcarConcluida}
+                        removeTodo={removeTodo} />
+                ))}
+
         </div> 
     );
 };

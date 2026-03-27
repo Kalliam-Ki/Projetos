@@ -1,17 +1,17 @@
 import React from 'react';
 import { Button } from './Button';
 
-export const Todo = ({ todo, toggleComplete, removeTodo }) => {
+export const Todo = ({ todo, marcarConcluida, removeTodo }) => {
     return (
         <div className='Todo'>
-            <div>
+            <div style = {{display:"flex", alignItems:"center", justifyContent:"center", gap:"8px"}}>
                 <input
                     type="checkbox"
                     checked={todo.concluida}
-                    onChange={() => toggleComplete(todo.id)}
+                    onChange={() => marcarConcluida(todo.id)}
                 />
                 <div>
-                    <p onClick={() => toggleComplete(todo.id)}
+                    <p onClick={() => marcarConcluida(todo.id)}
                     style={{
                         textDecoration: todo.concluida ? 'line-through' : 'none',
                         cursor: 'pointer'
@@ -20,11 +20,14 @@ export const Todo = ({ todo, toggleComplete, removeTodo }) => {
                     {todo.texto}
                     </p>
                 </div>
+
+                <Button onClick={() => removeTodo(todo.id)}>
+                    Remover
+                </Button>
+
             </div>
 
-            <Button onClick={() => removeTodo(todo.id)}>
-                Remover
-            </Button>
+            
 
         </div>
     );
