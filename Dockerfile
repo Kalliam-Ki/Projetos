@@ -1,35 +1,22 @@
-# ==========================================
-# ESTÁGIO 1: Construção (A Cozinha)
-# ==========================================
-# 1. Usamos uma imagem pesada do Node.js para compilar o projeto
-FROM node:18-alpine AS builder
+# 1. Pega uma imagem leve do Node
+FROM node:18-alpine
 
-# 2. Definimos a pasta de trabalho dentro do container
+# 2. Define a pasta onde vamos trabalhar lá dentro
 WORKDIR /app
 
-# 3. Copiamos apenas os arquivos de dependência primeiro (para aproveitar o cache do Docker)
-COPY package.json package-lock.json ./
+# 3. Copia APENAS o package.json primeiro (O Truque do Cache!)
+COPY package.json ./
 
-# 4. Instalamos as dependências
+# 4. Instala as dependências (Express)
 RUN npm install
 
-# 5. Copiamos o resto do código da nossa aplicação
+# 5. Agora sim, copia o restante do código (server.js)
 COPY . .
 
-# 6. Rodamos o build do Vite (Isso vai gerar uma pasta /app/dist com o código minificado)
-RUN npm run build
+# 6. Avisa que vamos usar a porta 3000
+EXPOSE 3000
 
-# ==========================================
-# ESTÁGIO 2: Produção (A Vitrine)
-# ==========================================
-# 7. Iniciamos uma nova imagem, agora usando o NGINX (um servidor web ultraleve)
-FROM nginx:alpine
+# 7. O botão de ligar!
+CMD ["node", "server.js"]
 
-# 8. Copiamos APENAS a pasta "dist" do Estágio 1 para a pasta pública do NGINX
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# 9. Expomos a porta padrão do NGINX
-EXPOSE 80
-
-# 10. Comando para manter o NGINX rodando
-CMD ["nginx", "-g", "daemon off;"]
+# Deixado anotações para não esquecer oq cada comando faz
