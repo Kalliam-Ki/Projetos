@@ -7,6 +7,7 @@ export const TodoWrapper = () => {
 
     const [todos, setTodos] = useState([]);
 
+    //Colocar emoji e categoria q sera adicionado com o modal
     const addTodo = (texto) => {
         const novaTarefa = {
                 id: Date.now(), //Gera um ID com base no timestamp
@@ -34,6 +35,8 @@ export const TodoWrapper = () => {
 
     };
     
+    //Adicionar tbm emoji e categoria
+    //Caso esteja concluida, a categoria e emoji precisam sumir e a cor deve ficar mais "apagada"
 
     return (
         <div className='TodoWrapper'>
