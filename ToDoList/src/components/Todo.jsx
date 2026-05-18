@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from './Button';
-import { TelaComModal } from './TelaComModal';
 
 // onClick fará com que ao clicar no texto ele mude, e cursor pointer muda para a mãozinha no cursor
 // mudar para onChange "conserta" isso
