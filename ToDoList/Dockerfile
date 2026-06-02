@@ -8,7 +8,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # 3. Copiamos apenas os arquivos de dependência primeiro (para aproveitar o cache do Docker)
-COPY package.json package-lock.json ./
+COPY ToDoList/package.json ToDoList/package-lock.json ./
 
 # 4. Instalamos as dependências
 RUN npm install

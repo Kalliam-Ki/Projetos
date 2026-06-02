@@ -26,7 +26,7 @@ jobs:
       - name: Build e Push da Imagem
         uses: docker/build-push-action@v5
         with:
-          context: . # Usa a pasta raiz do projeto
+          context: ./ToDoList # Usa a pasta raiz do projeto
           push: true # Envia para o registry
           # Mude "seu-usuario" para o seu usuário real abaixo!
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:latest
